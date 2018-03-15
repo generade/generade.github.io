@@ -4,8 +4,8 @@ $(document).ready(function(){
     try{
     if(w_dd.data.roundOnlyId == undefined || w_dd.data.roundOnlyId.length == 0){
 	  alert("roundOnlyId数据获取失败");
-	  return;
      }
+    }
      catch(e){console.log(e);}
   }
   else{
