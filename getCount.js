@@ -5,12 +5,11 @@ $(document).ready(function(){
     if(w_dd.data.roundOnlyId == undefined || w_dd.data.roundOnlyId.length == 0){
 	  alert("roundOnlyId数据获取失败");
      }
-    }
-     catch(e){console.log(e);}
-  }
   else{
 	  $("#onlyId").html(w_dd.data.roundOnlyId);
   }
+    }
+	 catch(e){console.log(e);}
   $(".dati").bind("click",function(){
     ajaxGet('game_info/share');
   });
