@@ -30,6 +30,8 @@ for(var i = 0; i<count; i++){
 	}
 	catch(e){
 		alert("鼠标信息获取错误，请刷新页面重试。。。");
+		return;
+
 	}
 }	
 });
