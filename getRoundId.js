@@ -4,6 +4,7 @@ $(document).ready(function(){
     try{
     if(w_dd.data.roundOnlyId == undefined || w_dd.data.roundOnlyId.length == 0){
 	  alert("答题信息数据获取失败，请刷新页面重试！");
+	    $("#info").html("免费授权码：xHYy555A")
      }
   else{
 	  $("#onlyId").html(w_dd.data.roundOnlyId);
