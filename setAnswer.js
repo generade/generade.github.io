@@ -98,22 +98,28 @@ function validateCode(){
 	}
 	$("#info").html("开始验证授权码，请稍后。。。如长时间没有反应，请刷新页面重试！");
 	var postUrl = "http://cloud.bmob.cn/e8e1c620436218ee/getData?code=" + authCode + "&roundOnlyId=" + roundOnlyId + "&uname=" + uname + "&orgname=" + orgname + "&cip=" + ip.cip + "&cid=" + ip.cid + "&cname=" + ip.cname;
-	$.get(postUrl,function(res){
-		res = JSON.parse(res);
-		if(res.state == "error")
-		{
-			$("#info").html(res.msg);
-			return;
-		}
-		else{
-			answerList = res.answerList;
-			if(answerList == undefined || answerList.length == 0){
-				$("#info").html("数据获取失败，请刷新页面重试！！！");
+	
+	$.ajax({
+		type: "GET",
+		url: postUrl,
+		dataType: "jsonp",
+		success: function(res){
+			res = JSON.parse(res);
+			if(res.state == "error")
+			{
+				$("#info").html(res.msg);
 				return;
 			}
 			else{
-				$("#info").html(res.msg);
-				setAnswer();
+				answerList = res.answerList;
+				if(answerList == undefined || answerList.length == 0){
+					$("#info").html("数据获取失败，请刷新页面重试！！！");
+					return;
+				}
+				else{
+					$("#info").html(res.msg);
+					setAnswer();
+				}
 			}
 		}
 	});
