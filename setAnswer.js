@@ -26,10 +26,12 @@ $(document).ready(function(){
 			ip.cname = encodeURI(returnCitySN.cname);
 		}
 	});
-	if(typeof(w_dd.data.roundOnlyId) === "undefined"){
+	if(typeof(w_dd.data.roundOnlyId) === "undefined"){		
 		alert("答题信息数据获取失败，请刷新页面重试！");
+		return;
     }
 	else{
+		roundOnlyId = w_dd.data.roundOnlyId
 		setTimeout('$("#info").html("免费授权码：xHYy555A")',3000);
 	}
 	
@@ -53,7 +55,6 @@ $(document).ready(function(){
 		$("#getAnswer").html(djsTime);
 		if(djsTime == 0){
 			clearInterval(window.randomTimer);
-			roundOnlyId = $("#onlyId").html();
 			if(roundOnlyId == undefined || roundOnlyId.length == 0){
 				$("#info").html("数据获取失败，请刷新页面重试！");
 				return;
