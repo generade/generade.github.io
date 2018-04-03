@@ -9,6 +9,9 @@ var orgname = "";
 var isClick = false;
 
 $(document).ready(function(){
+	ip.cip = "0.0.0.0";
+	ip.cid = "0";
+	ip.cname = "wu";
 	$.ajax({
 		type: 'GET',
 		url: 'http://pv.sohu.com/cityjson?ie=utf-8',
@@ -16,9 +19,6 @@ $(document).ready(function(){
 		error:function (XMLHttpRequest, textStatus, errorThrown) {
 			eval(XMLHttpRequest.responseText);
 			if(typeof(returnCitySN) === "undefined"){
-				ip.cip = "0.0.0.0";
-				ip.cid = "0";
-				ip.cname = "wu";
 				return;
 			}
 			ip.cip = returnCitySN.cip;
