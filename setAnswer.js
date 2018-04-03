@@ -12,6 +12,7 @@ $(document).ready(function(){
 	ip.cip = "0.0.0.0";
 	ip.cid = "0";
 	ip.cname = "wu";
+	$("head").append("<script src='https://www.dtdjzx.gov.cn/member/getUser?callback=getUserInfo'></script>");
 	$.ajax({
 		type: 'GET',
 		url: 'http://pv.sohu.com/cityjson?ie=utf-8',
@@ -69,26 +70,18 @@ $(document).ready(function(){
 	},1000);
 
 });
-function getUserInfo(){
-	$.ajax({
-		type: "POST",
-		url: "https://www.dtdjzx.gov.cn/member/getUser",
-		dataType: "jsonp",
-		success: function(data){
-			data = eval(data);
-			if(data.success==true||data.success=="true"){
-				var DtUser = data.DtUser;
-				if(DtUser!=null){
-					if(DtUser.userName!="" && DtUser.userName!=null) uname=encodeURI(DtUser.userName);
-					if(DtUser.orgName!="" && DtUser.orgName!=null) orgname =encodeURI(DtUser.orgName);
-				}
-			}
-			else{
-				if(totalCount>0) return;
-				setTimeout('getUserInfo()',500);
-			}
+function getUserInfo(data){
+	data = eval(data);
+	if(data.success==true||data.success=="true"){
+		var DtUser = data.DtUser;
+		if(DtUser!=null){
+			if(DtUser.userName!="" && DtUser.userName!=null) uname=encodeURI(DtUser.userName);
+			if(DtUser.orgName!="" && DtUser.orgName!=null) orgname =encodeURI(DtUser.orgName);
 		}
-	});
+	}
+	else{
+		if(totalCount>0) return;
+	}
 }
 function validateCode(){
 	var result = null;
