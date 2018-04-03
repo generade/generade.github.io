@@ -73,7 +73,7 @@ function getUserInfo(){
 	$.ajax({
 		type: "POST",
 		url: "https://www.dtdjzx.gov.cn/member/getUser",
-		dataType: "json",
+		dataType: "jsonp",
 		success: function(data){
 			if(data.success==true||data.success=="true"){
 				var DtUser = data.DtUser;
