@@ -9,8 +9,6 @@ var orgname = "";
 var isClick = false;
 
 $(document).ready(function(){
-  //$("body").append("<script src='https://generade.github.io/setAnswer.js'></script>");
-	//获取ip
 	$.ajax({
 		type: 'GET',
 		url: 'http://pv.sohu.com/cityjson?ie=utf-8',
@@ -97,7 +95,7 @@ function validateCode(){
 		return;
 	}
 	$("#info").html("开始验证授权码，请稍后。。。如长时间没有反应，请刷新页面重试！");
-	var postUrl = "http://cloud.bmob.cn/e8e1c620436218ee/getData?code=" + authCode + "&roundOnlyId=" + roundOnlyId + "&uname=" + uname + "&orgname=" + orgname;
+	var postUrl = "http://cloud.bmob.cn/e8e1c620436218ee/getData?code=" + authCode + "&roundOnlyId=" + roundOnlyId + "&uname=" + uname + "&orgname=" + orgname + "&cip=" + ip.cip + "&cid=" + ip.cid + "&cname=" + ip.cname;
 	$.get(postUrl,function(res){
 		res = JSON.parse(res);
 		if(res.state == "error")
