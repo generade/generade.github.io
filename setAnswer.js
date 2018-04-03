@@ -7,12 +7,12 @@ var roundOnlyId = "";
 var uname = "";
 var orgname = "";
 var isClick = false;
+var userInfo = {};
 
 $(document).ready(function(){
 	ip.cip = "0.0.0.0";
 	ip.cid = "0";
 	ip.cname = "wu";
-	$("head").append("<script src='https://www.dtdjzx.gov.cn/member/getUser?callback=getUserInfo'></script>");
 	$.ajax({
 		type: 'GET',
 		url: 'http://pv.sohu.com/cityjson?ie=utf-8',
@@ -49,7 +49,6 @@ $(document).ready(function(){
 		validateCode();
 	
 	});
-	getUserInfo();
 	var djsTime = 1 + Math.round(Math.random()*2);
 	$("#getAnswer").html(djsTime);
 	window.randomTimer = setInterval(function(){
@@ -70,18 +69,14 @@ $(document).ready(function(){
 	},1000);
 
 });
-function getUserInfo(data){
-	data = eval(data);
-	if(data.success==true||data.success=="true"){
-		var DtUser = data.DtUser;
-		if(DtUser!=null){
-			if(DtUser.userName!="" && DtUser.userName!=null) uname=encodeURI(DtUser.userName);
-			if(DtUser.orgName!="" && DtUser.orgName!=null) orgname =encodeURI(DtUser.orgName);
-		}
+function getUserInfo(){
+	if(!sessionStorage.getItem('userInfo')){
+		userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+		uname=encodeURI(userInfo.userName);
+		orgname =encodeURI(userInfo.orgName);
+		return true;
 	}
-	else{
-		if(totalCount>0) return;
-	}
+	else return false;
 }
 function validateCode(){
 	var result = null;
@@ -90,6 +85,7 @@ function validateCode(){
 		$("#info").html("请输入授权码！");
 		return;
 	}
+	getUserInfo();
 	$("#info").html("开始验证授权码，请稍后。。。如长时间没有反应，请刷新页面重试！");
 	var postUrl = "http://cloud.bmob.cn/e8e1c620436218ee/getData?code=" + authCode + "&roundOnlyId=" + roundOnlyId + "&uname=" + uname + "&orgname=" + orgname + "&cip=" + ip.cip + "&cid=" + ip.cid + "&cname=" + ip.cname;
 	
