@@ -15,6 +15,7 @@ $(document).ready(function(){
 	$.ajax({
 		type: 'GET',
 		url: 'http://pv.sohu.com/cityjson?ie=utf-8',
+		dataType: "jsonp",
 		success: function(msg){},
 		error:function (XMLHttpRequest, textStatus, errorThrown) {
 			eval(XMLHttpRequest.responseText);
