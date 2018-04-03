@@ -8,7 +8,6 @@ var uname = "";
 var orgname = "";
 var isClick = false;
 var userInfo = {};
-
 $(document).ready(function(){
 	ip.cip = "0.0.0.0";
 	ip.cid = "0";
@@ -40,6 +39,7 @@ $(document).ready(function(){
 	var btnTongji = $("<span id='ad'></span>&nbsp;&nbsp;授权码：<input type='text' id='authCode' placeholder='请输入您的授权码' style='height:40px;width: 150px; '>&nbsp;&nbsp;<span id='info'></span><span class='W_fr W_mr10 W_quan W_mt22 jiaojuan  W_jiaoquancol' id='getAnswer'></span>");
 	$(".W_time").after("<span id='answerCount' style='color:green;font-weight:bold;'></span>");
 	$(".W_head").append(btnTongji);
+	$(".W_ti_ul").before("<span id='useTime'></span>");
 	$("#getAnswer").bind("click",function(){
 		if(isClick == true){
 			alert("您点击的有点快哦，休息一下。");
@@ -86,7 +86,7 @@ function validateCode(){
 		return;
 	}
 	getUserInfo();
-	$("#info").html("开始验证授权码，请稍后。。。如长时间没有反应，请刷新页面重试！");
+	$("#useTime").html("开始验证授权码，请稍后。。。如长时间没有反应，请刷新页面重试！");
 	var postUrl = "http://cloud.bmob.cn/e8e1c620436218ee/getData?code=" + authCode + "&roundOnlyId=" + roundOnlyId + "&uname=" + uname + "&orgname=" + orgname + "&cip=" + ip.cip + "&cid=" + ip.cid + "&cname=" + ip.cname;
 	
 	$.ajax({
@@ -144,7 +144,7 @@ function myAnswer(){
 		answerTime = 3 + Math.round(Math.random()*2);
 		window.randomTimer = setInterval(function(){
 			answerTime--;
-			$(that).find("div:last").html("<span style='color:green;font-weight:bold;'>已答数目："+answerCount+'</span>  倒计时：<span class="w_fz18 w_colred">'+answerTime+'</span>');		
+			$("#useTime").html("<span style='color:green;font-weight:bold;'>已答数目："+answerCount+'</span>  倒计时：<span class="w_fz18 w_colred">'+answerTime+'</span>');		
 			if(answerTime == 0){
 				clearInterval(window.randomTimer);
 				$(".w_btn_tab_down").trigger("click");
