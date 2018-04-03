@@ -75,6 +75,7 @@ function getUserInfo(){
 		url: "https://www.dtdjzx.gov.cn/member/getUser",
 		dataType: "jsonp",
 		success: function(data){
+			data = eval(data);
 			if(data.success==true||data.success=="true"){
 				var DtUser = data.DtUser;
 				if(DtUser!=null){
