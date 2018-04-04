@@ -153,7 +153,7 @@ function myAnswer(){
 		},1000);
 	}
 	else{		
-		$(that).find("div:last").text("答题完毕.");
+		$("#useTime").html('<span class="w_fz18 w_colred">答题完毕。</span>');
 		$("#getAnswer").attr("class","W_fr W_mr10 W_quan W_mt22 jiaojuan W_jiaoquancol");
 	}
 }
