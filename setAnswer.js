@@ -37,7 +37,6 @@ $(document).ready(function(){
     }
 	else{
 		roundOnlyId = w_dd.data.roundOnlyId
-		$("#info").html("授权码获取地址：<a href='https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.594c1debwrOyXh&id=565923416767' target='_blank'>点此获取</a>");
 	}
 	$("#getAnswer").bind("click",function(){
 		if(isClick == true){
