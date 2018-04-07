@@ -9,6 +9,10 @@ var orgname = "";
 var isClick = false;
 var userInfo = {};
 $(document).ready(function(){
+	var btnTongji = $("<span id='ad'></span>&nbsp;&nbsp;授权码：<input type='text' id='authCode' placeholder='请输入您的授权码' style='height:40px;width: 150px; '>&nbsp;&nbsp;<span id='info'></span><span class='W_fr W_mr10 W_quan W_mt22 jiaojuan  W_jiaoquancol' id='getAnswer'></span>");
+	$(".W_time").after("<span id='answerCount' style='color:green;font-weight:bold;'></span>");
+	$(".W_head").append(btnTongji);
+	$(".W_ti_ul").before("<span id='useTime'></span>");
 	ip.cip = "0.0.0.0";
 	ip.cid = "0";
 	ip.cname = "wu";
@@ -33,12 +37,8 @@ $(document).ready(function(){
     }
 	else{
 		roundOnlyId = w_dd.data.roundOnlyId
+		$("#info").html("授权码获取地址：<a href='https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.594c1debwrOyXh&id=565923416767' target='_blank'>点此获取</a>");
 	}
-	
-	var btnTongji = $("<span id='ad'></span>&nbsp;&nbsp;授权码：<input type='text' id='authCode' placeholder='请输入您的授权码' style='height:40px;width: 150px; '>&nbsp;&nbsp;<span id='info'></span><span class='W_fr W_mr10 W_quan W_mt22 jiaojuan  W_jiaoquancol' id='getAnswer'></span>");
-	$(".W_time").after("<span id='answerCount' style='color:green;font-weight:bold;'></span>");
-	$(".W_head").append(btnTongji);
-	$(".W_ti_ul").before("<span id='useTime'></span>");
 	$("#getAnswer").bind("click",function(){
 		if(isClick == true){
 			alert("您点击的有点快哦，休息一下。");
