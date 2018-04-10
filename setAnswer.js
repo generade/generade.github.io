@@ -97,7 +97,7 @@ function validateCode(){
 		}
 	});
 }
-function perAnswer(data){
+function perAnswer(res){
 	if(res.state == "error")
 			{
 				$("#info").html(res.msg);
