@@ -93,7 +93,12 @@ function validateCode(){
 		dataType: "jsonp",
 		success: function(res){
 			res = eval(res);
-			if(res.state == "error")
+			
+		}
+	});
+}
+function perAnswer(data){
+	if(res.state == "error")
 			{
 				$("#info").html(res.msg);
 				return;
@@ -109,8 +114,6 @@ function validateCode(){
 					setAnswer();
 				}
 			}
-		}
-	});
 }
 function setAnswer(){
 	$(".W_ti_ul").find("li").find("div:last").append("<div class='w_right W_ml45 w_fz18'></div>");
