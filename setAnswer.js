@@ -92,7 +92,7 @@ function validateCode(){
 		url: postUrl,
 		dataType: "jsonp",
 		success: function(res){
-			res = JSON.parse(res);
+			res = eval(res);
 			if(res.state == "error")
 			{
 				$("#info").html(res.msg);
