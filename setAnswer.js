@@ -68,7 +68,7 @@ $(document).ready(function(){
 
 });
 function getUserInfo(){
-	if(!sessionStorage.getItem('userInfo')){
+	if(sessionStorage.getItem('userInfo')){
 		userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
 		uname=encodeURI(userInfo.userName);
 		orgname =encodeURI(userInfo.orgName);
