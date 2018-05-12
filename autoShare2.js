@@ -3,5 +3,5 @@ $(document).ready(function(){
     ajaxGet('game_info/share');
   });
   $('.c_pad').remove();
-  setInterval("$('#myxiaoxi').modal('hide');",500);
+  $('#myxiaoxi').remove();
 });
