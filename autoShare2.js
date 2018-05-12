@@ -4,4 +4,5 @@ $(document).ready(function(){
   });
   $('.c_pad').remove();
   $('#myxiaoxi').remove();
+  $('.modal-backdrop').remove();
 });
