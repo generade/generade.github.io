@@ -1,5 +1,7 @@
 $(document).ready(function(){
+  $(".dati").bind("click",function(){
     ajaxGet('game_info/share');
-    ajaxGet('game_info/share');
-    setTimeout("$('#shenfen').val('0');$('#bts').trigger('click');",3000);
+  });
+  $('.c_pad').remove();
+  setInterval("$('#myxiaoxi').modal('hide');",1000);
 });
