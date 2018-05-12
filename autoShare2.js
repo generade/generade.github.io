@@ -3,6 +3,6 @@ $(document).ready(function(){
     ajaxGet('game_info/share');
   });
   $('.c_pad').remove();
-  $('#myxiaoxi').remove();
-  $('.modal-backdrop').remove();
+  setInterval("$('#myxiaoxi').modal('hide');",200);
+  
 });
