@@ -141,7 +141,7 @@ function myAnswer(){
 		answerCount++;
 		examFlag = false;
 	}
-	if(totalCount < 20){
+	if(totalCount < 50){
 		$('.w_btn_tab_down').removeClass('W_bgcol');
 		answerTime = 3+ Math.round(Math.random()*3);
 		window.randomTimer = setInterval(function(){
