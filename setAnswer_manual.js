@@ -47,14 +47,9 @@ $(document).ready(function(){
 		$("#getAnswer").html(djsTime);
 		if(djsTime == 0){
 			clearInterval(window.randomTimer);
-			if(roundOnlyId == undefined || roundOnlyId.length == 0){
-				$("#info").html("数据获取失败，请刷新页面重试！");
-				return;
-			}
-			else{
-				$("#getAnswer").attr("class","W_fr W_mr10 W_quan W_mt22 jiaojuan");
-				$("#getAnswer").html("开始答题");
-				$("#getAnswer").trigger("click");
+			$("#getAnswer").attr("class","W_fr W_mr10 W_quan W_mt22 jiaojuan");
+			$("#getAnswer").html("开始答题");
+			$("#getAnswer").trigger("click");
 			}
 		}
 		
