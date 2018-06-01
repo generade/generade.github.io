@@ -142,7 +142,7 @@ function myAnswer(){
 	}
 	if(totalCount < 50){
 		$('.w_btn_tab_down').removeClass('W_bgcol');
-		answerTime = 3 + Math.round(Math.random()*2);
+		answerTime = 2 + Math.round(Math.random()*2);
 		window.randomTimer = setInterval(function(){
 			answerTime--;
 			$("#useTime").html("<span style='color:green;font-weight:bold;'>已答数目："+answerCount+'</span>  倒计时：<span class="w_fz18 w_colred">'+answerTime+'</span>');		
