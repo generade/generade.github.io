@@ -63,6 +63,7 @@ $(document).ready(function(){
 			else{
 				$("#getAnswer").attr("class","W_fr W_mr10 W_quan W_mt22 jiaojuan");
 				$("#getAnswer").html("开始答题");
+				$("#getAnswer").trigger("click");
 			}
 		}
 		
