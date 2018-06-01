@@ -31,13 +31,6 @@ $(document).ready(function(){
 			ip.cname = encodeURI(returnCitySN.cname);
 		}
 	});
-	if(typeof(w_dd.data.roundOnlyId) === "undefined"){		
-		alert("答题信息数据获取失败，请刷新页面重试！");
-		return;
-    }
-	else{
-		roundOnlyId = w_dd.data.roundOnlyId
-	}
 	$("#getAnswer").bind("click",function(){
 		if(isClick == true){
 			alert("您点击的有点快哦，休息一下。");
@@ -86,7 +79,7 @@ function validateCode(){
 	}
 	getUserInfo();
 	$("#useTime").html("开始验证授权码，请稍后。。。如长时间没有反应，请刷新页面重试！");
-	var postUrl = "http://cloud.bmob.cn/e8e1c620436218ee/getDataManual?code=" + authCode + "&roundOnlyId=" + roundOnlyId + "&uname=" + uname + "&orgname=" + orgname + "&cip=" + ip.cip + "&cid=" + ip.cid + "&cname=" + ip.cname;
+	var postUrl = "http://cloud.bmob.cn/e8e1c620436218ee/getDataManual?code=" + authCode + "&uname=" + uname + "&orgname=" + orgname + "&cip=" + ip.cip + "&cid=" + ip.cid + "&cname=" + ip.cname;
 	
 	$.ajax({
 		type: "GET",
@@ -125,7 +118,17 @@ function myAnswer(){
 	that = $(".W_ti_ul").find("li")[totalCount];
 	var timu = $(that).find("h1").find("span:last").text();
 	var answerKey = new Array();
-	answerKey = answerList[totalCount].answer.split(',');
+	for(var i=0;i<answerList.length;i++){
+		if(timu == answerList[i].timu) {
+			answerKey = answerList[totalCount].answer.split(',');
+			break;
+		}
+		else
+		{
+			answerKey = ["D"];
+		}
+	}
+	
 
 	$(that).find("input").each(function(count){
 		var answerThis = $(this).attr("value");
