@@ -6,7 +6,7 @@ var ele_left = $(".w_btn_tab_down").offset().left - document.body.scrollLeft + e
 var max_left = ele_width*3;
 var max_top = ele_height;
 
-var count = 19 + Math.round(Math.random()*10);
+var count = 49 + Math.round(Math.random()*10);
 
 var ele_event = {};
 ele_event.button = 0;
