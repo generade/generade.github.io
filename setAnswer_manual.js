@@ -160,6 +160,7 @@ function myAnswer(){
 		$("#getAnswer").attr("class","W_fr W_mr10 W_quan W_mt22 jiaojuan W_jiaoquancol");
 		$(".jiaojuanss").trigger("click");
 		setTimeout('$(".jiaojuan").trigger("click");',2000);
-		
+		$("title").text("答完");
+
 	}
 }
