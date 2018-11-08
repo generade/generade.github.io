@@ -100,7 +100,7 @@ function startCountTime(){
 	window.studyTimer = setInterval(function(){
 		currentPlayTime++;
 		$("#currentPlayTime").html("<font color='red'>" + Math.round(currentPlayTime/60) + "分" + currentPlayTime%60 + "秒" + "</font>");
-	},1000);
+	},10000);
 }
 //10秒计时一次
 function studyProcess(){
@@ -131,7 +131,14 @@ function studyProcess(){
 			if(currentCourseNum >= courseList.length){
 				return ;
 			}
-			startStudy();
+			$.postJSON("/bintang/learntime", {
+				timelength:currentCourse.courseDuration,
+				courseId:currentCourse.courseId,
+				userId:userId,
+				studyTimes:50000
+			}).then(function(data) {
+					startStudy();
+				});
 		}
 	},10000);
 	
