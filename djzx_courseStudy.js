@@ -1,6 +1,4 @@
 //课程选择学习
-
-
 var courseList;
 var courseSelect = "";
 var currentCourse = {};   //当前学习视频信息
@@ -128,17 +126,18 @@ function studyProcess(){
 			clearInterval(sendTimer);
 			currentPlayTime = 0;
 			currentCourseNum++;
-			if(currentCourseNum >= courseList.length){
-				return ;
-			}
+			//马上学完
 			$.postJSON("/bintang/learntime", {
 				timelength:currentCourse.courseDuration,
 				courseId:currentCourse.courseId,
 				userId:userId,
 				studyTimes:50000
 			}).then(function(data) {
-					startStudy();
+				if(currentCourseNum >= courseList.length) return;
+				startStudy();
 				});
+			if(currentCourseNum >= courseList.length) return;	
+			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "</font>");
 		}
 	},10000);
 	
