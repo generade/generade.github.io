@@ -97,14 +97,14 @@ function addTimeCount(){
 }
 //计时开始
 function startCountTime(){
-	windows.studyTimer = setInterval(function(){
+	window.studyTimer = setInterval(function(){
 		currentPlayTime++;
 		$("#currentPlayTime").html("<font color='red'>" + currentPlayTime/60 + "分" + currentPlayTime%60 + "秒" + "</font>");
 	},10000);
 }
 //10秒计时一次
 function studyProcess(){
-	windows.sendTimer = setInterval(function(){
+	window.sendTimer = setInterval(function(){
 		var getStudyTimes = Math.round(currentPlayTime/60);
 		$.postJSON("/bintang/learntime", {
 				timelength:currentCourse.courseDuration,
