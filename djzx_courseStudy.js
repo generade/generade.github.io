@@ -66,7 +66,8 @@ function init_compontent(){
 	$("#courseSelect").change(function(){
 		$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text().split("|")[0] + "</font>");
 	});
-	
+	//得到总学时
+	getTotalHours();
 }
 function startStudy(){
 	currentCourse = courseList[currentCourseNum];
@@ -140,9 +141,19 @@ function studyProcess(){
 				});
 			if(currentCourseNum >= courseList.length) return;	
 			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "</font>");
+			//得到总学时
+			getTotalHours();
 		}
 	},10000);
 	
+}
+function getTotalHours(){
+	$.postJSON("/user/getOutTime", {year: "2018", userId: ""}).then(function (data){
+		if(data!=null){
+			totalTime = data.totalHours;
+			$("#lblTotalTime").html("<font color='red'>" + totalTime + "</font>");
+		}
+	});
 }
 
 function stopStudy(){
