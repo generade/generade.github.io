@@ -144,7 +144,7 @@ function studyProcess(){
 			//得到总学时
 			getTotalHours();
 		}
-	},10000);
+	},35000);
 	
 }
 function getTotalHours(){
