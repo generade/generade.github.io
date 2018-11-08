@@ -64,7 +64,7 @@ function init_compontent(){
 	$("#messageContent").css("height","100px");
 	//选择框变化
 	$("#courseSelect").change(function(){
-		courseNum =  $("#courseSelect option:selected").val();
+		currentCourseNum =  $("#courseSelect option:selected").val();
 		$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text().split("|")[0] + "</font>");
 	});
 	//得到总学时
