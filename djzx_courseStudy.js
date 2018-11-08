@@ -1,4 +1,6 @@
 //课程选择学习
+
+
 var courseList;
 var courseSelect = "";
 var currentCourse = {};   //当前学习视频信息
@@ -98,7 +100,7 @@ function startCountTime(){
 	window.studyTimer = setInterval(function(){
 		currentPlayTime++;
 		$("#currentPlayTime").html("<font color='red'>" + Math.round(currentPlayTime/60) + "分" + currentPlayTime%60 + "秒" + "</font>");
-	},10000);
+	},1000);
 }
 //10秒计时一次
 function studyProcess(){
