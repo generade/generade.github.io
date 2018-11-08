@@ -73,7 +73,7 @@ function startStudy(){
 	currentCourse = courseList[currentCourseNum];
 	currentTotalTime = currentCourse.courseDuration;
 	if(currentTotalTime <= 30 ){
-		currentTotalTime = (Math.round(currentTotalTime/2) + Math.round(Math.random()*2))*60;
+		currentTotalTime = (parseInt(currentTotalTime/2) + Math.round(Math.random()*2))*60;
 	}
 	else currentTotalTime = (15 + Math.round(Math.random()*2))*60;
 	addTimeCount();
@@ -100,13 +100,13 @@ function addTimeCount(){
 function startCountTime(){
 	window.studyTimer = setInterval(function(){
 		currentPlayTime++;
-		$("#currentPlayTime").html("<font color='red'>" + Math.round(currentPlayTime/60) + "分" + currentPlayTime%60 + "秒" + "</font>");
+		$("#currentPlayTime").html("<font color='red'>" + parseInt(currentPlayTime/60) + "分" + currentPlayTime%60 + "秒" + "</font>");
 	},1000);
 }
 //10秒计时一次
 function studyProcess(){
 	window.sendTimer = setInterval(function(){
-		var getStudyTimes = Math.round(currentPlayTime/60);
+		var getStudyTimes = parseInt(currentPlayTime/60);
 		$.postJSON("/bintang/learntime", {
 				timelength:currentCourse.courseDuration,
 				courseId:currentCourse.courseId,
