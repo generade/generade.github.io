@@ -99,8 +99,8 @@ function addTimeCount(){
 function startCountTime(){
 	window.studyTimer = setInterval(function(){
 		currentPlayTime++;
-		$("#currentPlayTime").html("<font color='red'>" + currentPlayTime/60 + "分" + currentPlayTime%60 + "秒" + "</font>");
-	},10000);
+		$("#currentPlayTime").html("<font color='red'>" + Math.round(currentPlayTime/60) + "分" + currentPlayTime%60 + "秒" + "</font>");
+	},1000);
 }
 //10秒计时一次
 function studyProcess(){
