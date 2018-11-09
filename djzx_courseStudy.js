@@ -68,6 +68,7 @@ function init_compontent(){
 		$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text().split("|")[0] + "</font>");
 	});
 	//得到总学时
+	getTotalHours();
 	window.getHoursTimer = setInterval("getTotalHours()",30000);
 }
 function startStudy(){
