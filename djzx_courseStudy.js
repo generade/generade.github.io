@@ -68,7 +68,7 @@ function init_compontent(){
 		$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text().split("|")[0] + "</font>");
 	});
 	//得到总学时
-	getTotalHours();
+	window.getHoursTimer = setInterval("getTotalHours()",30000);
 }
 function startStudy(){
 	currentCourse = courseList[currentCourseNum];
@@ -142,8 +142,6 @@ function studyProcess(){
 				});
 			if(currentCourseNum >= courseList.length) return;	
 			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "</font>");
-			//得到总学时
-			getTotalHours();
 		}
 	},15000);
 	
