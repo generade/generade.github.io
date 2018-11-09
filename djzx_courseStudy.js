@@ -131,12 +131,15 @@ function studyProcess(){
 			clearInterval(sendTimer);
 			currentPlayTime = 0;
 			currentCourseNum++;
+			var getTimeLength = currentCourse.courseDuration;
+			var getCourseId = currentCourse.courseId;
+			var getStudyTimes = getTimeLength*60 + Math.round(Math.random()*30);
 			//马上学完
 			$.postJSON("/bintang/learntime", {
-				timelength:currentCourse.courseDuration,
-				courseId:currentCourse.courseId,
+				timelength:getTimeLength,
+				courseId:getCourseId,
 				userId:userId,
-				studyTimes:currentCourse.courseDuration*60 + Math.round(Math.random()*30)
+				studyTimes:getStudyTimes
 			}).then(function(data) {
 				if(currentCourseNum >= courseList.length) return;
 				startStudy();
