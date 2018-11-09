@@ -60,12 +60,12 @@ function init_compontent(){
 	var lblTotalTime = "<label id='lblTotalTime'></label>";
 	
 	$("#messageContent").append('<div>' + lblText2 + lblCurrentCourseTitle + lblText3 + currentPlayTime + lblText4 + lblTotalTime + "</div>");
-	$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text().split("|")[0] + "</font>");
+	$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text().split("（")[0] + "</font>");
 	$("#messageContent").css("height","100px");
 	//选择框变化
 	$("#courseSelect").change(function(){
 		currentCourseNum =  $("#courseSelect option:selected").val();
-		$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text().split("|")[0] + "</font>");
+		$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text().split("（")[0] + "</font>");
 	});
 	//得到总学时
 	getTotalHours();
