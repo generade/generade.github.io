@@ -136,7 +136,7 @@ function studyProcess(){
 				timelength:currentCourse.courseDuration,
 				courseId:currentCourse.courseId,
 				userId:userId,
-				studyTimes:(currentCourse.courseDuration + 20)
+				studyTimes:(currentCourse.courseDuration + Math.round(Math.random()*10))
 			}).then(function(data) {
 				if(currentCourseNum >= courseList.length) return;
 				startStudy();
