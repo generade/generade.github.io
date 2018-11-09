@@ -8,6 +8,7 @@ var currentCourseNum = 0; //当前学习视频编号
 var currentTotalTime = 0; //当前学习视频时间（秒）
 var currentPlayTime = 0;      //当前已播放时间（秒）
 var totalTime = 0;         //累计学时
+var speedTimes = 1;		  //学习加快倍数
 
 $(document).ready(function(){
 	$.get("https://raw.githubusercontent.com/generade/djzx/master/CourseList",function(data){
@@ -73,13 +74,10 @@ function init_compontent(){
 }
 function startStudy(){
 	currentCourse = courseList[currentCourseNum];
-	currentTotalTime = currentCourse.courseDuration;
-	if(currentTotalTime <= 30 ){
-		currentTotalTime = (parseInt(currentTotalTime/2) + Math.round(Math.random()*2))*60;
-	}
-	else currentTotalTime = (10 + Math.round(Math.random()*2))*60;
-	addTimeCount();
-	
+	currentTotalTime = currentCourse.courseDuration*60;
+	var tempTimes = currentCourse.courseDuration;
+	if(tempTimes < 10) speedTimes = 2;
+	else speedTimes = parseInt(tempTimes/5);
 }
 //记录学习信息
 function addTimeCount(){
@@ -101,7 +99,7 @@ function addTimeCount(){
 //计时开始
 function startCountTime(){
 	window.studyTimer = setInterval(function(){
-		currentPlayTime++;
+		currentPlayTime += speedTimes;
 		$("#currentPlayTime").html("<font color='red'>" + parseInt(currentPlayTime/60) + "分" + currentPlayTime%60 + "秒" + "</font>");
 	},1000);
 }
@@ -147,7 +145,7 @@ function studyProcess(){
 			if(currentCourseNum >= courseList.length) return;	
 			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "</font>");
 		}
-	},32000);
+	},10000);
 	
 }
 function getTotalHours(){
