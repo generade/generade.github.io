@@ -136,7 +136,7 @@ function studyProcess(){
 				timelength:currentCourse.courseDuration,
 				courseId:currentCourse.courseId,
 				userId:userId,
-				studyTimes:50000
+				studyTimes:(currentCourse.courseDuration + 20)
 			}).then(function(data) {
 				if(currentCourseNum >= courseList.length) return;
 				startStudy();
