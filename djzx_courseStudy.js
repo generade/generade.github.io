@@ -147,7 +147,7 @@ function studyProcess(){
 			if(currentCourseNum >= courseList.length) return;	
 			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "</font>");
 		}
-	},15000);
+	},32000);
 	
 }
 function getTotalHours(){
