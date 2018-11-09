@@ -16,7 +16,7 @@ $(document).ready(function(){
 			courseSelect = courseSelect + "<select id='courseSelect' style='width:550px;height:30px;' >";
 			for(var i=0;i<courseList.length;i++){
 				courseList[i].courseNum = i;
-				courseSelect += "<option value='" + i + "'>" + courseList[i].courseName + "（时长：" + courseList[1].courseDuration+ "分钟|学时：" + courseList[i].courseHour + "）</option>";		
+				courseSelect += "<option value='" + i + "'>" + courseList[i].courseName + "（时长：" + courseList[i].courseDuration+ "分钟|学时：" + courseList[i].courseHour + "）</option>";		
 			}
 			courseSelect += "</select>&nbsp;&nbsp;&nbsp;&nbsp;";
 			//初始化控件
