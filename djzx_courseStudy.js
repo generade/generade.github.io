@@ -78,6 +78,7 @@ function startStudy(){
 	var tempTimes = currentCourse.courseDuration;
 	if(tempTimes < 10) speedTimes = 2;
 	else speedTimes = parseInt(tempTimes/5);
+	addTimeCount();
 }
 //记录学习信息
 function addTimeCount(){
