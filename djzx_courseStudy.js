@@ -101,7 +101,7 @@ function addTimeCount(){
 function startCountTime(){
 	window.studyTimer = setInterval(function(){
 		currentPlayTime += speedTimes;
-		$("#currentPlayTime").html("<font color='red'>" + parseInt(currentPlayTime/currentTotalTime*100)"%</font>");
+		$("#currentPlayTime").html("<font color='red'>" + parseInt(currentPlayTime/currentTotalTime*100) + "%</font>");
 	},1000);
 }
 //10秒计时一次
