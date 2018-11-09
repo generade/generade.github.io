@@ -77,7 +77,7 @@ function startStudy(){
 	if(currentTotalTime <= 30 ){
 		currentTotalTime = (parseInt(currentTotalTime/2) + Math.round(Math.random()*2))*60;
 	}
-	else currentTotalTime = (15 + Math.round(Math.random()*2))*60;
+	else currentTotalTime = (10 + Math.round(Math.random()*2))*60;
 	addTimeCount();
 	
 }
