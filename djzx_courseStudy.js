@@ -108,7 +108,7 @@ function startCountTime(){
 //10秒计时一次
 function studyProcess(){
 	window.sendTimer = setInterval(function(){
-		var getStudyTimes = parseInt(currentPlayTime/60);
+		var getStudyTimes = currentPlayTime;
 		$.postJSON("/bintang/learntime", {
 				timelength:currentCourse.courseDuration,
 				courseId:currentCourse.courseId,
@@ -136,7 +136,7 @@ function studyProcess(){
 				timelength:currentCourse.courseDuration,
 				courseId:currentCourse.courseId,
 				userId:userId,
-				studyTimes:(currentCourse.courseDuration + Math.round(Math.random()*10))
+				studyTimes:currentCourse.courseDuration*60 + Math.round(Math.random()*30)
 			}).then(function(data) {
 				if(currentCourseNum >= courseList.length) return;
 				startStudy();
