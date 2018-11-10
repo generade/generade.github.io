@@ -1,6 +1,4 @@
 //课程选择学习
-
-
 var courseList;
 var courseSelect = "";
 var currentCourse = {};   //当前学习视频信息
@@ -11,7 +9,7 @@ var totalTime = 0;         //累计学时
 var speedTimes = 1;		  //学习加快倍数
 
 $(document).ready(function(){
-	$.get("https://raw.githubusercontent.com/generade/djzx/master/CourseList",function(data){
+	$.get("https://raw.githubusercontent.com/generade/djzx/master/CourseList_dev",function(data){
 		if(data!=null||data!=""){
 			courseList = eval(data);
 			courseSelect = courseSelect + "<select id='courseSelect' style='width:550px;height:30px;' >";
