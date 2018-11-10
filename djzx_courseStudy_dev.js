@@ -74,8 +74,7 @@ function startStudy(){
 	currentCourse = courseList[currentCourseNum];
 	currentTotalTime = currentCourse.courseDuration*60;
 	var tempTimes = currentCourse.courseDuration;
-	if(tempTimes < 10) speedTimes = 2;
-	else speedTimes = parseInt(tempTimes/3);
+        speedTimes = parseInt(tempTimes/3);
 	addTimeCount();
 }
 //记录学习信息
