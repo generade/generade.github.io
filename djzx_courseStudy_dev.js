@@ -74,7 +74,8 @@ function startStudy(){
 	currentCourse = courseList[currentCourseNum];
 	currentTotalTime = currentCourse.courseDuration*60;
 	var tempTimes = currentCourse.courseDuration;
-        speedTimes = parseInt(tempTimes/3);
+	if(tempTimes < 10) speedTimes = 2;
+	else speedTimes = parseInt(tempTimes/5);
 	addTimeCount();
 }
 //记录学习信息
@@ -148,7 +149,7 @@ function studyProcess(){
 				startStudy();
 				});
 			if(currentCourseNum >= courseList.length) return;	
-			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "（时长：" + courseList[currentCourseNum].courseDuration+ "分钟|学时：" + courseList[currentCourseNum].courseHour + "）</option>");	);
+			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "（时长：" + courseList[currentCourseNum].courseDuration+ "分钟|学时：" + courseList[currentCourseNum].courseHour + "）</font>");
 		}
 	},10000);
 	
