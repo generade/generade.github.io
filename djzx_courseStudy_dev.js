@@ -130,7 +130,7 @@ function studyProcess(){
 			currentCourseNum++;
 			var getTimeLength = currentCourse.courseDuration;
 			var getCourseId = currentCourse.courseId;
-			var getTotalStudyTimes = getTimeLength*60 + Math.round(Math.random()*30);
+			var getTotalStudyTimes = getTimeLength*60;
 			//马上学完
 			$.postJSON("/bintang/learntime", {
 				timelength:getTimeLength,
@@ -148,7 +148,7 @@ function studyProcess(){
 				startStudy();
 				});
 			if(currentCourseNum >= courseList.length) return;	
-			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "</font>");
+			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "（时长：" + courseList[currentCourseNum].courseDuration+ "分钟|学时：" + courseList[currentCourseNum].courseHour + "）</option>");	);
 		}
 	},10000);
 	
