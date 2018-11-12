@@ -74,8 +74,7 @@ function startStudy(){
 	currentCourse = courseList[currentCourseNum];
 	currentTotalTime = currentCourse.courseDuration*60;
 	var tempTimes = currentCourse.courseDuration;
-	if(tempTimes < 10) speedTimes = 2;
-	else speedTimes = parseInt(tempTimes/5);
+    speedTimes = parseInt(tempTimes/2);
 	addTimeCount();
 }
 //记录学习信息
@@ -89,43 +88,21 @@ function addTimeCount(){
 				currentCourse.studyTimes = currentCourse.studyTimes?currentCourse.studyTimes:0;
 				//开始学习
 				studyProcess();
-				//开始计时
-				startCountTime();
 			}
 		}
 	);
 }
-//计时开始
-function startCountTime(){
-	window.studyTimer = setInterval(function(){
-		currentPlayTime += speedTimes;
-		//$("#currentPlayTime").html("<font color='red'>" + parseInt(currentPlayTime/60) + "分" + currentPlayTime%60 + "秒" + "</font>");
-		$("#currentPlayTime").html("<font color='red'>" + parseInt(currentPlayTime/currentTotalTime*100) + "%</font>");
-	},1000);
-}
-//10秒计时一次
 function studyProcess(){
 	window.sendTimer = setInterval(function(){
-		var getStudyTimes = currentPlayTime;
-		$.postJSON("/bintang/learntime", {
-				timelength:currentCourse.courseDuration,
-				courseId:currentCourse.courseId,
-				userId:userId,
-				studyTimes:getStudyTimes
-		}).then(function(data) {
-					if(data==false){
-						 returnTime = true;
-					 }
-					currentCourse.studyTimes = getStudyTimes;
-					console.log("learntime:"+currentCourse.studyTimes);
-			});
+		currentPlayTime += speedTimes;
+		$("#currentPlayTime").html("<font color='red'>" + parseInt(currentPlayTime/currentTotalTime*100)==100?100:parseInt(currentPlayTime/currentTotalTime*100) + "%</font>");
 		
+		var getStudyTimes = currentPlayTime;
 		if(currentPlayTime >= currentTotalTime){
 			//设置学习完的颜色
 			$("#courseSelect option[value='" + currentCourseNum + "']").css("background-color","green")
 			//播放下一个视频
 			//初始化时间参数等
-			clearInterval(studyTimer);
 			clearInterval(sendTimer);
 			currentPlayTime = 0;
 			currentCourseNum++;
@@ -146,12 +123,27 @@ function studyProcess(){
 				studyTimes:getTotalStudyTimes
 			}).then(function(data) {
 				if(currentCourseNum >= courseList.length) return;
+				console.log("learntime:"+getTotalStudyTimes);
 				startStudy();
 				});
 			if(currentCourseNum >= courseList.length) return;	
 			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "（时长：" + courseList[currentCourseNum].courseDuration+ "分钟|学时：" + courseList[currentCourseNum].courseHour + "）</font>");
 		}
-	},10000);
+/* 		else if(currentPlayTime%/30 == 0){
+			$.postJSON("/bintang/learntime", {
+				timelength:currentCourse.courseDuration,
+				courseId:currentCourse.courseId,
+				userId:userId,
+				studyTimes:getStudyTimes
+			}).then(function(data) {
+					if(data==false){
+						 returnTime = true;
+					 }
+					currentCourse.studyTimes = getStudyTimes;
+					console.log("learntime:"+currentCourse.studyTimes);
+				});
+		} */
+	},1000);
 	
 }
 function getTotalHours(){
