@@ -8,6 +8,7 @@ var currentPlayTime = 0;      //当前已播放时间（秒）
 var totalTime = 0;         //累计学时
 var speedTimes = 1;		  //学习加快倍数
 var studyPercent = 0;
+var studyCount = 0;
 
 $(document).ready(function(){
 	$.get("https://raw.githubusercontent.com/generade/djzx/master/CourseList_dev",function(data){
@@ -95,6 +96,7 @@ function addTimeCount(){
 }
 function studyProcess(){
 	window.sendTimer = setInterval(function(){
+		studyCount++;
 		currentPlayTime += speedTimes;
 		studyPercent = parseInt(currentPlayTime/currentTotalTime*100)==100?100:parseInt(currentPlayTime/currentTotalTime*100);
 		$("#currentPlayTime").html("<font color='red'>" + studyPercent + "%</font>");
@@ -106,6 +108,7 @@ function studyProcess(){
 			//播放下一个视频
 			//初始化时间参数等
 			clearInterval(sendTimer);
+			studyCount = 0;
 			currentPlayTime = 0;
 			currentCourseNum++;
 			var getTimeLength = currentCourse.courseDuration;
@@ -131,20 +134,20 @@ function studyProcess(){
 			if(currentCourseNum >= courseList.length) return;	
 			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "（时长：" + courseList[currentCourseNum].courseDuration+ "分钟|学时：" + courseList[currentCourseNum].courseHour + "）</font>");
 		}
-/* 		else if(currentPlayTime%/30 == 0){
+		else if(studyCount%/30 == 0){
 			$.postJSON("/bintang/learntime", {
 				timelength:currentCourse.courseDuration,
 				courseId:currentCourse.courseId,
 				userId:userId,
-				studyTimes:getStudyTimes
+				studyTimes:currentPlayTime
 			}).then(function(data) {
 					if(data==false){
 						 returnTime = true;
 					 }
-					currentCourse.studyTimes = getStudyTimes;
+					currentCourse.studyTimes = currentPlayTime;
 					console.log("learntime:"+currentCourse.studyTimes);
 				});
-		} */
+		}
 	},1000);
 	
 }
@@ -160,4 +163,5 @@ function getTotalHours(){
 function stopStudy(){
 	clearInterval(sendTimer);
 	currentPlayTime = 0;
+	studyCount = 0;
 }
