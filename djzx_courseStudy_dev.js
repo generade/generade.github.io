@@ -134,7 +134,7 @@ function studyProcess(){
 			if(currentCourseNum >= courseList.length) return;	
 			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "（时长：" + courseList[currentCourseNum].courseDuration+ "分钟|学时：" + courseList[currentCourseNum].courseHour + "）</font>");
 		}
-		else if(studyCount%/30 == 0){
+		else if(studyCount%30 == 0){
 			$.postJSON("/bintang/learntime", {
 				timelength:currentCourse.courseDuration,
 				courseId:currentCourse.courseId,
