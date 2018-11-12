@@ -1,7 +1,7 @@
 //课程选择学习
 var alreayStudyList;              //已学习课程列表
-var courseList = [];    //确定的学习可能列表
-var preCourseList = new Array();  //预学习课程列表
+var courseList = [];     //确定的学习可能列表
+var preCourseList;  //预学习课程列表
 var courseSelect = "";
 var currentCourse = {};   //当前学习视频信息
 var currentCourseNum = 0; //当前学习视频编号
@@ -49,7 +49,7 @@ function Init_Select(){
 			}
 			courseSelect = courseSelect + "<select id='courseSelect' style='width:550px;height:30px;' >";
 			for (var x=0;x<courseList.length;x++){
-				courseList[i].courseNum = i;
+				courseList[i]['courseNum'] = i;
 				courseSelect += "<option value='" + i + "'>" + courseList[i].courseName + "（时长：" + courseList[i].courseDuration+ "分钟|学时：" + courseList[i].courseHour + "）</option>";	
 			}			
 			courseSelect += "</select>&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -234,7 +234,7 @@ function Init_Select_Again(){
 		if(isAdd == false) courseList.push(preCourseList[i]);
 	}
 	for (var x=0;x<courseList.length;x++){
-		courseList[i].courseNum = i;
+		courseList[i]['courseNum'] = i;
 		courseSelect += "<option value='" + i + "'>" + courseList[i].courseName + "（时长：" + courseList[i].courseDuration+ "分钟|学时：" + courseList[i].courseHour + "）</option>";	
 	}			
 	//更新列表
