@@ -1,5 +1,7 @@
 //课程选择学习
-var courseList;
+var alreayStudyList;              //已学习课程列表
+var courseList;                   //确定的学习可能列表
+var preCourseList = new Array();  //预学习课程列表
 var courseSelect = "";
 var currentCourse = {};   //当前学习视频信息
 var currentCourseNum = 0; //当前学习视频编号
@@ -11,20 +13,49 @@ var studyPercent = 0;
 var studyCount = 0;
 
 $(document).ready(function(){
+	getCourseList();
+});
+function getCourseList(){
+	$.postJSON('/user/getPersonalList', {
+		 pageSize:1000, 
+		 pageNo: 1,
+		 courseType: '',
+		 studyStatus: '1',
+		 year:"2018"
+	}).then(function(dataSource){
+			if(dataSource!=null||dataSource!="undefined"){
+				alreayStudyList = dataSource.data; 
+				Init_Select();
+			}
+			else{
+				getCourseList();
+			}
+			
+		});
+}
+function Init_Select(){
 	$.get("https://raw.githubusercontent.com/generade/djzx/master/CourseList_dev",function(data){
 		if(data!=null||data!=""){
-			courseList = eval(data);
-			courseSelect = courseSelect + "<select id='courseSelect' style='width:550px;height:30px;' >";
-			for(var i=0;i<courseList.length;i++){
-				courseList[i].courseNum = i;
-				courseSelect += "<option value='" + i + "'>" + courseList[i].courseName + "（时长：" + courseList[i].courseDuration+ "分钟|学时：" + courseList[i].courseHour + "）</option>";		
+			preCourseList = eval(data);
+			for(var i=0;i<preCourseList.length;i++){
+				for(var j=0;j<alreayStudyList.length;j++){
+					if(preCourseList[i].courseId != alreayStudyList[j].courseId){
+						courseList.push(preCourseList[i]);
+					}
+				}
+
 			}
+			courseSelect = courseSelect + "<select id='courseSelect' style='width:550px;height:30px;' >";
+			for (var x=0;x<courseList.length;x++){
+				courseList[i].courseNum = i;
+				courseSelect += "<option value='" + i + "'>" + courseList[i].courseName + "（时长：" + courseList[i].courseDuration+ "分钟|学时：" + courseList[i].courseHour + "）</option>";	
+			}			
 			courseSelect += "</select>&nbsp;&nbsp;&nbsp;&nbsp;";
 			//初始化控件
 			init_compontent();
 		}
 	});
-});
+}
 
 function init_compontent(){
 	var lblText = "请选择开始课程：";
@@ -76,7 +107,7 @@ function startStudy(){
 	currentCourse = courseList[currentCourseNum];
 	currentTotalTime = currentCourse.courseDuration*60;
 	var tempTimes = currentCourse.courseDuration;
-        speedTimes = parseInt(tempTimes/2);
+    speedTimes = parseInt(tempTimes/2);
 	addTimeCount();
 }
 //记录学习信息
@@ -116,17 +147,21 @@ function studyProcess(){
 				courseId:getCourseId,
 				userId:userId,
 				studyTimes:getTotalStudyTimes
-			});
+			}).then(function(data) {
+				console.log("learntime:"+getTotalStudyTimes);
+				});
 			$.postJSON("/bintang/learntime", {
 				timelength:getTimeLength,
 				courseId:getCourseId,
 				userId:userId,
-				studyTimes:getTotalStudyTimes
+				studyTimes:getTotalStudyTimes+60
 			}).then(function(data) {
-				if(currentCourseNum >= courseList.length) return;
-				console.log("learntime:"+getTotalStudyTimes);
+				console.log("learntime:"+getTotalStudyTimes+60);
 				});
-			if(currentCourseNum >= courseList.length) return;	
+			if(currentCourseNum >= courseList.length) {
+				studyAgain();
+				return;
+			}				
 			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "（时长：" + courseList[currentCourseNum].courseDuration+ "分钟|学时：" + courseList[currentCourseNum].courseHour + "）</font>");
 			startStudy();
 		}
@@ -155,9 +190,52 @@ function getTotalHours(){
 		}
 	});
 }
-
 function stopStudy(){
 	clearInterval(sendTimer);
 	currentPlayTime = 0;
 	studyCount = 0;
 }
+//学完没有计入学时的，重新学习
+function studyAgain(){
+	$.postJSON('/user/getPersonalList', {
+		 pageSize:1000, 
+		 pageNo: 1,
+		 courseType: '',
+		 studyStatus: '1',
+		 year:"2018"
+	}).then(function(dataSource){
+			if(dataSource!=null||dataSource!="undefined"){
+				alreayStudyList = dataSource.data; 
+				Init_Select_Again();
+			}
+			else{
+				studyAgain();
+			}
+			
+		});
+}
+function Init_Select_Again(){
+	courseList = new Array();
+	courseSelect = "";
+	currentCourseNum = 0;
+	currentPlayTime = 0;
+	studyCount = 0;
+	
+	for(var i=0;i<preCourseList.length;i++){
+		for(var j=0;j<alreayStudyList.length;j++){
+			if(preCourseList[i].courseId != alreayStudyList[j].courseId){
+				courseList.push(preCourseList[i]);
+			}
+		}
+
+	}
+	for (var x=0;x<courseList.length;x++){
+		courseList[i].courseNum = i;
+		courseSelect += "<option value='" + i + "'>" + courseList[i].courseName + "（时长：" + courseList[i].courseDuration+ "分钟|学时：" + courseList[i].courseHour + "）</option>";	
+	}			
+	//更新列表
+	$("#courseSelect").html(courseSelect);
+	$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text() + "</font>");
+	//继续学习
+	startStudy();
+}		
