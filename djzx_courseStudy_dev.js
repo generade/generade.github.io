@@ -1,6 +1,6 @@
 //课程选择学习
 var alreayStudyList;              //已学习课程列表
-var courseList = new Array();     //确定的学习可能列表
+var courseList = [];    //确定的学习可能列表
 var preCourseList = new Array();  //预学习课程列表
 var courseSelect = "";
 var currentCourse = {};   //当前学习视频信息
