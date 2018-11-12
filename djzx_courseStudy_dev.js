@@ -7,6 +7,7 @@ var currentTotalTime = 0; //当前学习视频时间（秒）
 var currentPlayTime = 0;      //当前已播放时间（秒）
 var totalTime = 0;         //累计学时
 var speedTimes = 1;		  //学习加快倍数
+var studyPercent = 0;
 
 $(document).ready(function(){
 	$.get("https://raw.githubusercontent.com/generade/djzx/master/CourseList_dev",function(data){
@@ -95,9 +96,10 @@ function addTimeCount(){
 function studyProcess(){
 	window.sendTimer = setInterval(function(){
 		currentPlayTime += speedTimes;
-		$("#currentPlayTime").html("<font color='red'>" + parseInt(currentPlayTime/currentTotalTime*100)==100?100:parseInt(currentPlayTime/currentTotalTime*100) + "%</font>");
+		studyPercent = parseInt(currentPlayTime/currentTotalTime*100)==100?100:parseInt(currentPlayTime/currentTotalTime*100);
+		$("#currentPlayTime").html("<font color='red'>" + studyPercent + "%</font>");
 		
-		var getStudyTimes = currentPlayTime;
+		
 		if(currentPlayTime >= currentTotalTime){
 			//设置学习完的颜色
 			$("#courseSelect option[value='" + currentCourseNum + "']").css("background-color","green")
