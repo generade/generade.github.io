@@ -47,6 +47,7 @@ function Init_Select(){
 				}
 				if(isAdd == false) courseList.push(preCourseList[i]);
 			}
+			console.log(courseList);
 			courseSelect = courseSelect + "<select id='courseSelect' style='width:550px;height:30px;' >";
 			for (var x=0;x<courseList.length;x++){
 				courseList[i]['courseNum'] = i;
