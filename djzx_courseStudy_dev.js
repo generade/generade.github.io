@@ -47,9 +47,8 @@ function Init_Select(){
 				}
 				if(isAdd == false) courseList.push(preCourseList[i]);
 			}
-			console.log(courseList);
 			courseSelect = courseSelect + "<select id='courseSelect' style='width:550px;height:30px;' >";
-			for (var x=0;x<courseList.length;x++){
+			for (var i=0;i<courseList.length;i++){
 				courseList[i]['courseNum'] = i;
 				courseSelect += "<option value='" + i + "'>" + courseList[i].courseName + "（时长：" + courseList[i].courseDuration+ "分钟|学时：" + courseList[i].courseHour + "）</option>";	
 			}			
