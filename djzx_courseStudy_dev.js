@@ -76,7 +76,7 @@ function startStudy(){
 	currentCourse = courseList[currentCourseNum];
 	currentTotalTime = currentCourse.courseDuration*60;
 	var tempTimes = currentCourse.courseDuration;
-    speedTimes = parseInt(tempTimes/2);
+        speedTimes = parseInt(tempTimes/2);
 	addTimeCount();
 }
 //记录学习信息
@@ -85,14 +85,10 @@ function addTimeCount(){
 		function(data){
 			var code = data.code;
 			console.log( data.isRecord );
-			if(!code) addTimeCount();
-			else{
-				currentCourse.studyTimes = currentCourse.studyTimes?currentCourse.studyTimes:0;
-				//开始学习
-				studyProcess();
-			}
 		}
 	);
+	currentCourse.studyTimes = currentCourse.studyTimes?currentCourse.studyTimes:0;		
+	studyProcess();
 }
 function studyProcess(){
 	window.sendTimer = setInterval(function(){
