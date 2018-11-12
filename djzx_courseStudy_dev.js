@@ -156,7 +156,6 @@ function getTotalHours(){
 }
 
 function stopStudy(){
-	clearInterval(studyTimer);
 	clearInterval(sendTimer);
 	currentPlayTime = 0;
 }
