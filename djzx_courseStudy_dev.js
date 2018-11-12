@@ -1,6 +1,6 @@
 //课程选择学习
 var alreayStudyList;              //已学习课程列表
-var courseList = new Array();      //确定的学习可能列表
+var courseList = new Array();     //确定的学习可能列表
 var preCourseList = new Array();  //预学习课程列表
 var courseSelect = "";
 var currentCourse = {};   //当前学习视频信息
@@ -38,12 +38,14 @@ function Init_Select(){
 		if(data!=null||data!=""){
 			preCourseList = eval(data);
 			for(var i=0;i<preCourseList.length;i++){
+				var isAdd = false;
 				for(var j=0;j<alreayStudyList.length;j++){
-					if(preCourseList[i].courseId != alreayStudyList[j].courseId){
-						courseList.push(preCourseList[i]);
+					if(preCourseList[i].courseId == alreayStudyList[j].courseId){
+						isAdd = true;
+						break;
 					}
 				}
-
+				if(isAdd == false) courseList.push(preCourseList[i]);
 			}
 			courseSelect = courseSelect + "<select id='courseSelect' style='width:550px;height:30px;' >";
 			for (var x=0;x<courseList.length;x++){
@@ -222,12 +224,14 @@ function Init_Select_Again(){
 	studyCount = 0;
 	
 	for(var i=0;i<preCourseList.length;i++){
+		var isAdd = false;
 		for(var j=0;j<alreayStudyList.length;j++){
-			if(preCourseList[i].courseId != alreayStudyList[j].courseId){
-				courseList.push(preCourseList[i]);
+			if(preCourseList[i].courseId == alreayStudyList[j].courseId){
+				isAdd = true;
+				break;
 			}
 		}
-
+		if(isAdd == false) courseList.push(preCourseList[i]);
 	}
 	for (var x=0;x<courseList.length;x++){
 		courseList[i].courseNum = i;
@@ -238,4 +242,4 @@ function Init_Select_Again(){
 	$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text() + "</font>");
 	//继续学习
 	startStudy();
-}		
+}
