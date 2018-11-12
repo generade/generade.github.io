@@ -129,10 +129,10 @@ function studyProcess(){
 			}).then(function(data) {
 				if(currentCourseNum >= courseList.length) return;
 				console.log("learntime:"+getTotalStudyTimes);
-				startStudy();
 				});
 			if(currentCourseNum >= courseList.length) return;	
 			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "（时长：" + courseList[currentCourseNum].courseDuration+ "分钟|学时：" + courseList[currentCourseNum].courseHour + "）</font>");
+			startStudy();
 		}
 		else if(studyCount%30 == 0){
 			$.postJSON("/bintang/learntime", {
