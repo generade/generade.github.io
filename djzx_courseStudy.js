@@ -1,14 +1,14 @@
-//课程选择学习
-var alreayStudyList;              //已学习课程列表
-var courseList = [];     //确定的学习可能列表
-var preCourseList;  //预学习课程列表
+
+var alreayStudyList;    
+var courseList = [];  
+var preCourseList;  
 var courseSelect = "";
-var currentCourse = {};   //当前学习视频信息
-var currentCourseNum = 0; //当前学习视频编号
-var currentTotalTime = 0; //当前学习视频时间（秒）
-var currentPlayTime = 0;      //当前已播放时间（秒）
-var totalTime = 0;         //累计学时
-var speedTimes = 1;		  //学习加快倍数
+var currentCourse = {};   
+var currentCourseNum = 0;
+var currentTotalTime = 0; 
+var currentPlayTime = 0;   
+var totalTime = 0;       
+var speedTimes = 1;		
 var studyPercent = 0;
 var studyCount = 0;
 
@@ -53,7 +53,6 @@ function Init_Select(){
 				courseSelect += "<option value='" + i + "'>" + courseList[i].courseName + "（时长：" + courseList[i].courseDuration+ "分钟|学时：" + courseList[i].courseHour + "）</option>";	
 			}			
 			courseSelect += "</select>&nbsp;&nbsp;&nbsp;&nbsp;";
-			//初始化控件
 			init_compontent();
 		}
 	});
@@ -66,26 +65,17 @@ function init_compontent(){
 	$(".nav-box").before('<div id="messageContent" style="width:1050px;padding:20px 25px;background-color: #fff;margin: 0 auto;line-height:45px;height:100px;"><div>' + lblText + courseSelect + btnStart +btnEnd + "</div></div>");
 
 	$("#Start").bind("click",function(){
-		//禁用本按钮
 		$(this).attr("disabled","disabled");
-		//禁用选择框
 		$("#courseSelect").attr("disabled","disabled");
-		//启用暂停按钮
 		$("#End").removeAttr("disabled");
-		//开始学习
 		startStudy();
 	});
 	$("#End").bind("click",function(){
-		//禁用本按钮
 		$(this).attr("disabled","disabled");
-		//启用开始按钮
 		$("#Start").removeAttr("disabled");
-		//启用选择框
 		$("#courseSelect").removeAttr("disabled");
-		//停止学习
 		stopStudy();
 	});
-	//当前学习内容页
 	var lblText2 = "当前学习课程：";
 	var lblText3 = "&nbsp;&nbsp;&nbsp;&nbsp;当前课程学习进度：";
 	var lblText4 = "&nbsp;&nbsp;&nbsp;&nbsp;累计学时：";
@@ -96,12 +86,10 @@ function init_compontent(){
 	$("#messageContent").append('<div>' + lblText2 + lblCurrentCourseTitle + lblText3 + currentPlayTime + lblText4 + lblTotalTime + "</div>");
 	$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text() + "</font>");
 	$("#messageContent").css("height","100px");
-	//选择框变化
 	$("#courseSelect").change(function(){
 		currentCourseNum =  $("#courseSelect option:selected").val();
 		$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text() + "</font>");
 	});
-	//得到总学时
 	getTotalHours();
 	window.getHoursTimer = setInterval("getTotalHours()",30000);
 }
@@ -112,7 +100,6 @@ function startStudy(){
         speedTimes = parseInt(tempTimes/5);
 	addTimeCount();
 }
-//记录学习信息
 function addTimeCount(){
 	$.postJSON("/bintang/addTimeCount", currentCourse,).then(
 		function(data){
@@ -132,10 +119,7 @@ function studyProcess(){
 		
 		
 		if(currentPlayTime >= currentTotalTime){
-			//设置学习完的颜色
 			$("#courseSelect option[value='" + currentCourseNum + "']").css("background-color","green")
-			//播放下一个视频
-			//初始化时间参数等
 			clearInterval(sendTimer);
 			studyCount = 0;
 			currentPlayTime = 0;
@@ -143,7 +127,6 @@ function studyProcess(){
 			var getTimeLength = currentCourse.courseDuration;
 			var getCourseId = currentCourse.courseId;
 			var getTotalStudyTimes = getTimeLength*60;
-			//马上学完
 			$.postJSON("/bintang/learntime", {
 				timelength:getTimeLength,
 				courseId:getCourseId,
@@ -197,7 +180,6 @@ function stopStudy(){
 	currentPlayTime = 0;
 	studyCount = 0;
 }
-//学完没有计入学时的，重新学习
 function studyAgain(){
 	$.postJSON('/user/getPersonalList', {
 		 pageSize:1000, 
@@ -237,9 +219,7 @@ function Init_Select_Again(){
 		courseList[i]['courseNum'] = i;
 		courseSelect += "<option value='" + i + "'>" + courseList[i].courseName + "（时长：" + courseList[i].courseDuration+ "分钟|学时：" + courseList[i].courseHour + "）</option>";	
 	}			
-	//更新列表
 	$("#courseSelect").html(courseSelect);
 	$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text() + "</font>");
-	//继续学习
 	startStudy();
 }
