@@ -63,8 +63,9 @@ function init_compontent(){
 	var lblText = "请选择开始课程：";
     var btnStart = '<input type="button" value="开始" id="Start" style="height:30px;width:60px;border: 1px solid;border-radius: 3px;background: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;';
     var btnEnd = '<input type="button" value="暂停" id="End" disabled="disabled" style="height:30px;width:60px;border: 1px solid ;border-radius: 3px;background: #fff;">'
-	$(".nav-box").before('<div id="messageContent" style="width:1050px;padding:20px 25px;background-color: #fff;margin: 0 auto;line-height:45px;height:100px;"><div>' + lblText + courseSelect + btnStart +btnEnd + "</div></div>");
-
+	var iptTime = '<input type="text" id="iptTime" value="50" style="width:30px;height:30px;border: 1px solid;border-radius: 3px;text-align:center;">&nbsp;&nbsp;&nbsp;&nbsp;';
+	$(".nav-box").before('<div id="messageContent" style="width:1050px;padding:20px 25px;background-color: #fff;margin: 0 auto;line-height:45px;height:100px;"><div>' + lblText + courseSelect + iptTime + btnStart + btnEnd + "</div></div>");
+	
 	$("#Start").bind("click",function(){
 		//禁用本按钮
 		$(this).attr("disabled","disabled");
@@ -72,6 +73,8 @@ function init_compontent(){
 		$("#courseSelect").attr("disabled","disabled");
 		//启用暂停按钮
 		$("#End").removeAttr("disabled");
+		//禁用课时录入窗口
+		$("#iptTime").attr("disabled","disabled");
 		//开始学习
 		startStudy();
 	});
@@ -82,6 +85,8 @@ function init_compontent(){
 		$("#Start").removeAttr("disabled");
 		//启用选择框
 		$("#courseSelect").removeAttr("disabled");
+		//启用科室录入窗口
+		$("#iptTime").removeAttr("disabled");
 		//停止学习
 		stopStudy();
 	});
@@ -189,6 +194,8 @@ function getTotalHours(){
 		if(data!=null){
 			totalTime = data.totalHours;
 			$("#lblTotalTime").html("<font color='red'>" + totalTime + "</font>");
+			$("title").text(totalTime);
+			if(totalTime >= parseInt($("iptTime").val())) stopStudy();
 		}
 	});
 }
