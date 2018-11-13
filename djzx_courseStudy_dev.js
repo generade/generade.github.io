@@ -39,6 +39,7 @@ function Init_Select(){
 			preCourseList = eval(data);
 			for(var i=0;i<preCourseList.length;i++){
 				var isAdd = false;
+				if(alreayStudyList == null) break;
 				for(var j=0;j<alreayStudyList.length;j++){
 					if(preCourseList[i].courseId == alreayStudyList[j].courseId){
 						isAdd = true;
