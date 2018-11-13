@@ -1,5 +1,5 @@
 //课程选择学习
-var alreayStudyList=[];             //已学习课程列表
+var alreayStudyList=[];              //已学习课程列表
 var courseList = [];     //确定的学习可能列表
 var preCourseList;  //预学习课程列表
 var courseSelect = "";
@@ -39,6 +39,7 @@ function Init_Select(){
 			preCourseList = eval(data);
 			for(var i=0;i<preCourseList.length;i++){
 				var isAdd = false;
+				if(alreayStudyList.length == null) break;
 				for(var j=0;j<alreayStudyList.length;j++){
 					if(preCourseList[i].courseId == alreayStudyList[j].courseId){
 						isAdd = true;
