@@ -199,7 +199,7 @@ function getTotalHours(){
 			totalTime = data.totalHours;
 			$("#lblTotalTime").html("<font color='red'>" + totalTime + "</font>");
 			$("title").text(totalTime);
-			if(totalTime >= parseInt($("iptTime").val())) stopStudy();
+			if(totalTime >= parseInt($("#iptTime").val())) stopStudy();
 		}
 	});
 }
