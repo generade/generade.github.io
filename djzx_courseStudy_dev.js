@@ -1,5 +1,5 @@
 //课程选择学习
-var alreayStudyList;              //已学习课程列表
+var alreayStudyList=[];             //已学习课程列表
 var courseList = [];     //确定的学习可能列表
 var preCourseList;  //预学习课程列表
 var courseSelect = "";
