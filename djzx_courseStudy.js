@@ -131,22 +131,20 @@ function studyProcess(){
 			var getTimeLength = currentCourse.courseDuration;
 			var getCourseId = currentCourse.courseId;
 			var getTotalStudyTimes = getTimeLength*60;
-			$.postJSON("/bintang/learntime", {
-				timelength:getTimeLength,
+			$.postJSON("/bintang/updateTimeEnd", {
 				courseId:getCourseId,
 				userId:userId,
-				studyTimes:getTotalStudyTimes
-			}).then(function(data) {
-				console.log("learntime:"+getTotalStudyTimes);
-				});
-			$.postJSON("/bintang/learntime", {
-				timelength:getTimeLength,
+			})
+			.then(function(data) {
+				console.log("is end")
+			});
+			$.postJSON("/bintang/updateTimeEnd", {
 				courseId:getCourseId,
 				userId:userId,
-				studyTimes:getTotalStudyTimes+60
-			}).then(function(data) {
-				console.log("learntime:"+getTotalStudyTimes+60);
-				});
+			})
+			.then(function(data) {
+				console.log("is end")
+			});
 			if(currentCourseNum >= courseList.length) {
 				studyAgain();
 				return;
@@ -168,7 +166,7 @@ function studyProcess(){
 					console.log("learntime:"+currentCourse.studyTimes);
 				});
 		}
-	},1000);
+	},500);
 	
 }
 function getTotalHours(){
