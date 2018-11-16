@@ -1,5 +1,5 @@
 //课程选择学习
-var alreayStudyList = new Array();              //已学习课程列表
+var alreayStudyList=[];              //已学习课程列表
 var courseList = [];     //确定的学习可能列表
 var preCourseList;  //预学习课程列表
 var courseSelect = "";
@@ -67,7 +67,7 @@ function init_compontent(){
 	var lblText = "请选择开始课程：";
     var btnStart = '<input type="button" value="开始" id="Start" style="height:30px;width:60px;border: 1px solid;border-radius: 3px;background: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;';
     var btnEnd = '<input type="button" value="暂停" id="End" disabled="disabled" style="height:30px;width:60px;border: 1px solid ;border-radius: 3px;background: #fff;">'
-	var iptTime = '<input type="text" id="iptTime" value="35" style="width:30px;height:30px;border: 1px solid;border-radius: 3px;text-align:center;">&nbsp;&nbsp;&nbsp;&nbsp;';
+	var iptTime = '<input type="text" id="iptTime" value="50" style="width:30px;height:30px;border: 1px solid;border-radius: 3px;text-align:center;">&nbsp;&nbsp;&nbsp;&nbsp;';
 	$(".nav-box").before('<div id="messageContent" style="width:1050px;padding:20px 25px;background-color: #fff;margin: 0 auto;line-height:45px;height:100px;"><div>' + lblText + courseSelect + iptTime + btnStart + btnEnd + "</div></div>");
 	
 	$("#Start").bind("click",function(){
@@ -153,7 +153,7 @@ function studyProcess(){
 			var getCourseId = currentCourse.courseId;
 			var getTotalStudyTimes = getTimeLength*60;
 			//马上学完
-			$.postJSON("/bintang/learntime", {
+			/* $.postJSON("/bintang/learntime", {
 				timelength:getTimeLength,
 				courseId:getCourseId,
 				userId:userId,
@@ -168,7 +168,21 @@ function studyProcess(){
 				studyTimes:getTotalStudyTimes+60
 			}).then(function(data) {
 				console.log("learntime:"+getTotalStudyTimes+60);
-				});
+				}); */
+			$.postJSON("/bintang/updateTimeEnd", {
+				courseId:getCourseId,
+				userId:userId,
+			})
+			.then(function(data) {
+				console.log("is end")
+			});
+			$.postJSON("/bintang/updateTimeEnd", {
+				courseId:getCourseId,
+				userId:userId,
+			})
+			.then(function(data) {
+				console.log("is end")
+			});
 			if(currentCourseNum >= courseList.length) {
 				studyAgain();
 				return;
@@ -190,7 +204,7 @@ function studyProcess(){
 					console.log("learntime:"+currentCourse.studyTimes);
 				});
 		}
-	},1000);
+	},200);
 	
 }
 function getTotalHours(){
