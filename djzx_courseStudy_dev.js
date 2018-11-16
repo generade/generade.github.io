@@ -112,7 +112,7 @@ function init_compontent(){
 	});
 	//得到总学时
 	getTotalHours();
-	window.getHoursTimer = setInterval("getTotalHours()",30000);
+	window.getHoursTimer = setInterval("getTotalHours()",10000);
 }
 function startStudy(){
 	currentCourse = courseList[currentCourseNum];
