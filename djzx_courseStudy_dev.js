@@ -10,7 +10,7 @@ var currentPlayTime = 0;      //当前已播放时间（秒）
 var totalTime = 0;         //累计学时
 var speedTimes = 1;		  //学习加快倍数
 var studyPercent = 0;
-var studyCount = 0;
+var studyCount = 0;   
 
 $(document).ready(function(){
 	getCourseList();
