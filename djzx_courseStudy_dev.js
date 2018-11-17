@@ -96,8 +96,8 @@ function init_compontent(){
 	});
 	//当前学习内容页
 	var lblText2 = "当前学习课程：";
-	var lblText3 = "&nbsp;&nbsp;&nbsp;&nbsp;当前课程学习进度：";
-	var lblText4 = "&nbsp;&nbsp;&nbsp;&nbsp;累计学时：";
+	var lblText3 = </br>当前课程学习进度：";
+	var lblText4 = "</br>累计学时：";
 	var lblCurrentCourseTitle = "<label id='lblCurrentCourseTitle'></label>";
 	var currentPlayTime = "<label id='currentPlayTime'></label>";
 	var lblTotalTime = "<label id='lblTotalTime'></label>";
