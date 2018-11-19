@@ -101,7 +101,7 @@ function startStudy(){
 	currentCourse = courseList[currentCourseNum];
 	currentTotalTime = currentCourse.courseDuration*60;
 	var tempTimes = currentCourse.courseDuration;
-        speedTimes = parseInt(tempTimes/5);
+        speedTimes = parseInt(tempTimes/3);
 	addTimeCount();
 }
 function addTimeCount(){
