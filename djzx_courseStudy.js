@@ -91,7 +91,7 @@ function init_compontent(){
 	$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text() + "</font>");
 	$("#messageContent").css("height","100px");
 	$("#courseSelect").change(function(){
-		currentCourseNum =  $("#courseSelect option:selected").val();
+		currentCourseNum = parseInt($("#courseSelect option:selected").val());
 		$("#lblCurrentCourseTitle").html("<font color='red'>" + $("#courseSelect option:selected").text() + "</font>");
 	});
 	getTotalHours();
