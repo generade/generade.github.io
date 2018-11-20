@@ -204,7 +204,7 @@ function studyProcess(){
 					console.log("learntime:"+currentCourse.studyTimes);
 				});
 		}
-	},50);
+	},500);
 	
 }
 function getTotalHours(){
