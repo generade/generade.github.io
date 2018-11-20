@@ -208,7 +208,7 @@ function studyProcess(){
 	
 }
 function getTotalHours(){
-	$.postJSON("/user/getOutTime", {year: "2018", userId: ""}).then(function (data){
+/* 	$.postJSON("/user/getOutTime", {year: "2018", userId: ""}).then(function (data){
 		if(data!=null){
 			totalTime = data.totalHours;
 			$("#lblTotalTime").html("<font color='red'>" + totalTime + "</font>");
@@ -216,6 +216,25 @@ function getTotalHours(){
 			if(totalTime >= parseInt($("#iptTime").val())) stopStudy();
 		}
 	});
+	 */
+	$.postJSON('/user/getPersonalList', {
+		 pageSize:2000, 
+		 pageNo: 1,
+		 courseType: '',
+		 studyStatus: '1',
+		 year:"2018"
+	}).then(function(dataSource){
+			if(dataSource!=null||dataSource!="undefined"){
+				alreayStudyList = dataSource.data; 
+				totalTime = 0;
+				for(var i=0;i<alreayStudyList.length;i++){
+					totalTime += alreayStudyList[i].courseHour;
+				}
+				$("#lblTotalTime").html("<font color='red'>" + totalTime + "</font>");
+				$("title").text(totalTime);
+				if(totalTime >= parseInt($("#iptTime").val())) stopStudy();
+			}			
+		});
 }
 function stopStudy(){
 	clearInterval(sendTimer);
