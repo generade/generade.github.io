@@ -11,6 +11,7 @@ var totalTime = 0;         //累计学时
 var speedTimes = 1;		  //学习加快倍数
 var studyPercent = 0;
 var studyCount = 0;   
+var isStop = false;
 
 $(document).ready(function(){
 	getCourseList();
@@ -34,7 +35,7 @@ function getCourseList(){
 		});
 }
 function Init_Select(){
-	$.get("https://raw.githubusercontent.com/generade/djzx/master/CourseList_All",function(data){
+	$.get("https://coding.net/u/generade/p/dangjian/git/raw/master/CourseList_All",function(data){
 		if(data!=null||data!=""){
 			preCourseList = eval(data);
 			for(var i=0;i<preCourseList.length;i++){
@@ -112,13 +113,13 @@ function init_compontent(){
 	});
 	//得到总学时
 	getTotalHours();
-	window.getHoursTimer = setInterval("getTotalHours()",10000);
+	window.getHoursTimer = setInterval("getTotalHours()",20000);
 }
 function startStudy(){
 	currentCourse = courseList[currentCourseNum];
 	currentTotalTime = currentCourse.courseDuration*60;
 	var tempTimes = currentCourse.courseDuration;
-        speedTimes = parseInt(tempTimes/2)?parseInt(tempTimes/2):1;
+    speedTimes = parseInt(tempTimes/2)?parseInt(tempTimes/2):1;
 	addTimeCount();
 }
 //记录学习信息
@@ -213,9 +214,37 @@ function getTotalHours(){
 			totalTime = data.totalHours;
 			$("#lblTotalTime").html("<font color='red'>" + totalTime + "</font>");
 			$("title").text(totalTime);
-			if(totalTime >= parseInt($("#iptTime").val())) stopStudy();
+			if(totalTime >= parseInt($("#iptTime").val())){
+				isStop = true;
+				stopStudy();
+			}
+			else{
+				if(isStop == true){
+					isStop = false;
+					studyAgain();
+				}
+			}
 		}
 	});
+	
+/* 	$.postJSON('/user/getPersonalList', {
+		 pageSize:2000, 
+		 pageNo: 1,
+		 courseType: '',
+		 studyStatus: '1',
+		 year:"2018"
+	}).then(function(dataSource){
+			if(dataSource!=null||dataSource!="undefined"){
+				alreayStudyList = dataSource.data; 
+				totalTime = 0;
+				for(var i=0;i<alreayStudyList.length;i++){
+					totalTime += alreayStudyList[i].courseHour;
+				}
+				$("#lblTotalTime").html("<font color='red'>" + totalTime + "</font>");
+				$("title").text(totalTime);
+				if(totalTime >= parseInt($("#iptTime").val())) stopStudy();
+			}			
+		}); */
 }
 function stopStudy(){
 	clearInterval(sendTimer);
