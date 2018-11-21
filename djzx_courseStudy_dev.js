@@ -35,7 +35,7 @@ function getCourseList(){
 		});
 }
 function Init_Select(){
-	$.get("https://raw.githubusercontent.com/generade/djzx/master/CourseList_All",function(data){
+	$.get("https://raw.githubusercontent.com/generade/djzx/master/CourseList_dev",function(data){
 		if(data!=null||data!=""){
 			preCourseList = eval(data);
 			for(var i=0;i<preCourseList.length;i++){
