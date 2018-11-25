@@ -138,7 +138,7 @@ function studyProcess(){
 		currentPlayTime += speedTimes;
 		studyPercent = parseInt(currentPlayTime/currentTotalTime*100)==100?100:parseInt(currentPlayTime/currentTotalTime*100);
 		$("#currentPlayTime").html("<font color='red'>" + studyPercent + "%</font>");
-		if(currentPlayTime >= currentTotalTime){
+		if(currentPlayTime > currentTotalTime){
 			//设置学习完的颜色
 			$("#courseSelect option[value='" + currentCourseNum + "']").css("background-color","green")
 			//播放下一个视频
