@@ -138,7 +138,7 @@ function studyProcess(){
 		currentPlayTime += speedTimes;
 		studyPercent = parseInt(currentPlayTime/currentTotalTime*100)==100?100:parseInt(currentPlayTime/currentTotalTime*100);
 		$("#currentPlayTime").html("<font color='red'>" + studyPercent + "%</font>");
-		if(currentPlayTime > currentTotalTime){
+		if(currentPlayTime > (currentTotalTime+60)){
 			//设置学习完的颜色
 			$("#courseSelect option[value='" + currentCourseNum + "']").css("background-color","green")
 			//播放下一个视频
@@ -154,7 +154,7 @@ function studyProcess(){
 			$("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "（时长：" + courseList[currentCourseNum].courseDuration+ "分钟|学时：" + courseList[currentCourseNum].courseHour + "）</font>");
 			startStudy();
 		}
-        else if(studyCount%30 == 0){
+                else if(studyCount%30 == 0){
 			$.postJSON("/bintang/learntime", {
 				timelength:currentCourse.courseDuration,
 				courseId:currentCourse.courseId,
