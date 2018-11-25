@@ -123,7 +123,7 @@ function startStudy(){
 }
 //记录学习信息
 function addTimeCount(){
-	$.postJSON("/bintang/addTimeCount", currentCourse,).then(
+	$.postJSON("/user/addTimeCount", currentCourse,).then(
 		function(data){
 			var code = data.code;
 			console.log( data.isRecord );
