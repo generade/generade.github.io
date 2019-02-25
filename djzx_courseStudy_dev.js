@@ -189,12 +189,12 @@ function catEndTime() {
 }
 function init_compontent() {
     var lblText = "请选择开始课程：";
-    var isStudyLast = '<input type="checkbox" id="isStudyLast" style="height:20px;width:20px;">只学一分钟&nbsp;&nbsp;&nbsp;&nbsp;';
-    var custom_1 = '<input type="checkbox" id="custom_1" style="height:20px;width:20px;" title="十九大党章公开课（20讲），马克思是对的（5集）等">自定义1&nbsp;&nbsp;&nbsp;&nbsp;';
+    //var isStudyLast = '<input type="checkbox" id="isStudyLast" style="height:20px;width:20px;">只学一分钟&nbsp;&nbsp;&nbsp;&nbsp;';
+    //var custom_1 = '<input type="checkbox" id="custom_1" style="height:20px;width:20px;" title="十九大党章公开课（20讲），马克思是对的（5集）等">自定义1&nbsp;&nbsp;&nbsp;&nbsp;';
     var btnStart = '<input type="button" value="开始" id="Start" style="height:30px;width:60px;border: 1px solid;border-radius: 3px;background: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;';
     var btnEnd = '<input type="button" value="暂停" id="End" disabled="disabled" style="height:30px;width:60px;border: 1px solid ;border-radius: 3px;background: #fff;">'
     var iptTime = '<input type="text" id="iptTime" value="70" style="width:30px;height:30px;border: 1px solid;border-radius: 3px;text-align:center;">&nbsp;&nbsp;&nbsp;&nbsp;';
-    $(".nav-box").before('<div id="messageContent" style="width:1050px;padding:10px 10px;background-color: #fff;margin: 0 auto;line-height:30px;height:200px;"><div>' + lblText + courseSelect + iptTime + isStudyLast + custom_1 + btnStart + btnEnd + "</div></div>");
+    $(".nav-box").before('<div id="messageContent" style="width:1050px;padding:10px 10px;background-color: #fff;margin: 0 auto;line-height:30px;height:200px;"><div>' + lblText + courseSelect + iptTime + btnStart + btnEnd + "</div></div>");
 
     $("#Start").bind("click",
     function() {
@@ -225,9 +225,9 @@ function init_compontent() {
         //停止学习
         stopStudy();
     });
-    $("#custom_1").change(function() {
+/*     $("#custom_1").change(function() {
         Init_Select_Custom1();
-    });
+    }); */
     //当前学习内容页
     var lblText2 = "当前学习课程：";
     var lblText3 = "</br>当前课程学习进度：";
@@ -264,8 +264,8 @@ function addTimeCount() {
         console.log(data.isRecord);
     });
     currentCourse.studyTimes = currentCourse.studyTimes ? currentCourse.studyTimes: 0;
-    if ($('#isStudyLast').prop('checked')) {　　currentPlayTime = currentTotalTime - 60;
-    }
+/*     if ($('#isStudyLast').prop('checked')) {　　currentPlayTime = currentTotalTime - 60;
+    } */
     startStudyProcess();
 }
 
