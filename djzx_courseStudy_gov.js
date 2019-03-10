@@ -120,7 +120,7 @@ function getCourseList() {
     });
 }
 function Init_Select() {
-    $.get("https://generade.coding.me/CourseList_gov",
+    $.get("https://generade.github.io/djzx_courseList_gov.txt",
     function(data) {
         if (data != null || data != "") {
             preCourseList = eval(data);
