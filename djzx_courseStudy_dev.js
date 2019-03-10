@@ -122,7 +122,7 @@ function getCourseList() {
     });
 }
 function Init_Select() {
-    $.get("https://generade.coding.me/CourseList_All",
+    $.get("https://generade.github.io/djzx_courseList_all.txt",
     function(data) {
         if (data != null || data != "") {
             preCourseList = eval(data);
