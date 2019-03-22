@@ -106,7 +106,7 @@ function StudyProgress() {
 
 function getCourseList() {
     $.postJSON('/user/getschoolfileList', {
-        pageSize: 1000,
+        pageSize: 2000,
         pageNo: 1,
         courseType: '',
         studyStatus: '1',
@@ -320,7 +320,7 @@ function stopStudy() {
 //学完没有计入学时的，重新学习
 function studyAgain() {
     $.postJSON('/user/getschoolfileList', {
-        pageSize: 1000,
+        pageSize: 2000,
         pageNo: 1,
         courseType: '',
         studyStatus: '1',
