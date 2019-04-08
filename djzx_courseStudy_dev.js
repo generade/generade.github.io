@@ -287,8 +287,9 @@ function startStudyProcess() {
             currentPlayTime = 0;
             currentCourseNum++;
             updateEnd();
+	    setTimeout(updateEnd,2000);
             $("#lblCurrentCourseTitle").html("<font color='red'>" + courseList[currentCourseNum].courseName + "（时长：" + courseList[currentCourseNum].courseDuration + "分钟|学时：" + courseList[currentCourseNum].courseHour + "）</font>");
-            startStudy();
+            setTimeout(startStudy,5000);
         } 
 		else if (currentPlayTime % recordProgress == 0) {
 			StudyProgress()
