@@ -206,8 +206,6 @@ function init_compontent() {
         $("#End").removeAttr("disabled");
         //禁用课时录入窗口
         $("#iptTime").attr("disabled", "disabled");
-        //计算预计时间
-        catEndTime();
         //开始学习
         startStudy();
 
@@ -255,6 +253,9 @@ function startStudy() {
     project = currentCourse;
     //var tempTimes = currentCourse.courseDuration;
     //speedTimes = parseInt(tempTimes/5)?parseInt(tempTimes/5):1;
+    //计算预计时间
+    catEndTime();	
+	
     addTimeCount();
 }
 //记录学习信息
