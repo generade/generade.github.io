@@ -15,7 +15,7 @@ var preProject = {};
 var maFlag = false;
 var userInfo = {};
 $(document).ready(function() {
-    init_compontent()；
+    init_compontent();
 	
 	getCourseList();
 });
