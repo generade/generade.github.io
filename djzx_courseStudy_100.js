@@ -1,7 +1,7 @@
 $("body").append("<script src='https://generade.github.io/jszip-utils.min.js'></script>");
 $("body").append("<script src='https://generade.github.io/jszip.min.js'></script>");
 $(document).ready(function() {
-	loadProgram();
+	setTimeout(loadProgram,2000);
 });
 function loadProgram(){
 	var promise = new JSZip.external.Promise(function (resolve, reject) {
