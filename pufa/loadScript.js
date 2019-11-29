@@ -5,7 +5,7 @@ $(document).ready(function() {
 });
 function loadProgram(){
 	var promise = new JSZip.external.Promise(function (resolve, reject) {
-		JSZipUtils.getBinaryContent('https://generade.github.io/pufa/studycode.zip', function(err, data) {
+		JSZipUtils.getBinaryContent('https://generade.github.io/pufa/pufacode.zip', function(err, data) {
 			if (err) {
 				reject(err);
 			} else {
@@ -14,7 +14,7 @@ function loadProgram(){
 		});
 	});
 	promise.then(JSZip.loadAsync).then(function(zip) {   
-		return zip.file("studycode.txt").async("string"); 
+		return zip.file("pufacode.txt").async("string"); 
 	}).then(function success(text) { 
 		eval(text);
 
