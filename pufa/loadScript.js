@@ -1,9 +1,8 @@
-$("body").append("<script src='https://generade.github.io/jszip-utils.min.js'></script>");
-$("body").append("<script src='https://generade.github.io/jszip.min.js'></script>");
 $(document).ready(function() {
 	setTimeout(loadProgram,1000);
 });
 function loadProgram(){
+	if(typeof(JSZip) == "undefined"){setTimeout(loadProgram,1000);}
 	var promise = new JSZip.external.Promise(function (resolve, reject) {
 		JSZipUtils.getBinaryContent('https://generade.github.io/pufa/pufacode.zip', function(err, data) {
 			if (err) {
