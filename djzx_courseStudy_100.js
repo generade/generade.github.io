@@ -1,5 +1,3 @@
-$("body").append("<script src='https://generade.github.io/jszip-utils.min.js'></script>");
-$("body").append("<script src='https://generade.github.io/jszip.min.js'></script>");
 $(document).ready(function() {
 	setTimeout(loadProgram,1000);
 });
